@@ -1,0 +1,67 @@
+# Python bytecode
+*.pyc
+*.pyo
+__pycache__
+
+# Virtualenv
+.env/
+.venv/
+venv/
+env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# IDE files
+.vscode/
+.idea/
+
+# PyCharm project files
+.idea/
+
+# macOS system files
+.DS_Store
+
+# Windows system files
+Thumbs.db
+
+# Logs
+*.log
+
+# Database files
+*.sqlite3
+
+# Pytest
+.cache/
+
+# coverage reports
+*.cover
+.coverage
+coverage.xml
+*.log
+
+# mypy
+.mypy_cache/
+
+# Pylint
+pylint_report.txt
+
+# TypeScript and JavaScript files
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Data files (can be sensitive data or large files)
+*.csv
+*.tsv
+*.xlsx
+*.json
+*.xml
+
+# Compiled files
+*.out
+*.o
+*.a
+*.so
+
+pretrained/
