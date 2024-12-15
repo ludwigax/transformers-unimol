@@ -2,7 +2,7 @@ import math
 import torch
 from torch import nn
 
-from configuration_unimol import UnimolConfig
+from .configuration_unimol import UnimolConfig
 from transformers.activations import ACT2FN
 
 class BaseMLP(nn.Module):

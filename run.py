@@ -1,6 +1,7 @@
 from model.modeling_unimol import UnimolForSequenceClassification
 from model.tokenization_unimol import UnimolTokenizer
 from utils.trainer import Trainer, CustomTest
+import os
 import torch
 import pandas as pd
 import numpy as np
@@ -22,9 +23,15 @@ params = {
     'device': 'cuda'
 }
 
-df = pd.read_excel("qm9conj_w.xlsx")
+DATASET_DIR = ".eval_aqsoldb/"
+
+df = pd.read_csv(os.path.join(DATASET_DIR, "dataset-not-FA.csv"))
 smiles_list = df["SMILES"].tolist()
-labels = df["W value"].tolist()
+labels = df["Solubility"].tolist()
+
+# df = pd.read_excel("qm9conj_w.xlsx")
+# smiles_list = df["SMILES"].tolist()
+# labels = df["W value"].tolist()
 
 dataset = []
 for smiles, label in tqdm(zip(smiles_list, labels), desc="Encoding SMILES"):
@@ -41,5 +48,5 @@ trainer = Trainer(model, dataset, params)
 trainer.train()
 
 # Log the results
-test = CustomTest(trainer)
+test = CustomTest(trainer, name=".eval_aqsoldb/non-af-metrics")
 test.run()

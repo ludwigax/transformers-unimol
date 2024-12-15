@@ -14,8 +14,8 @@ from transformers.modeling_outputs import BaseModelOutput, SequenceClassifierOut
 from transformers.cache_utils import Cache
 from transformers.activations import ACT2FN
 from transformers.utils import logging
-from configuration_unimol import UnimolConfig
-from utils_unimol import GaussianLayer, MLP2LYR, NORM2LYR
+from .configuration_unimol import UnimolConfig
+from .utils_unimol import GaussianLayer, MLP2LYR, NORM2LYR
 
 logger = logging.get_logger(__name__)
 

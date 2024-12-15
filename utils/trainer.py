@@ -3,8 +3,8 @@ from torch import nn
 from torch.utils.data import DataLoader, Dataset, random_split
 from torch.optim import AdamW
 from transformers import get_scheduler
-from data_collator import UnimolDataCollator
-from data_transform import UnimolTransform
+from .data_collator import UnimolDataCollator
+from .data_transform import UnimolTransform
 from tqdm import tqdm
 
 from typing import Dict, List, Union
@@ -133,13 +133,14 @@ import pandas as pd
 import numpy as np
 
 class CustomTest:
-    def __init__(self, trainer: Trainer):
+    def __init__(self, trainer: Trainer, name: str = None):
         self.trainer = trainer
         self.device = trainer.device
         self.model = trainer.model
         self.train_dataloader = trainer.train_dataloader
         self.eval_dataloader = trainer.eval_dataloader
         self.transform = trainer.transform
+        self.name = name if name is not None else "evaluation_metrics"
 
     def evaluate_metrics(self, dataloader: DataLoader):
         """Calculate evaluation metrics for the model."""
@@ -198,7 +199,7 @@ class CustomTest:
         axs[2].legend()
 
         plt.tight_layout()
-        plt.savefig('evaluation_metrics.png')
+        plt.savefig(f'{self.name}.png')
         # plt.show()
 
     def save_metrics(self, mse_train, mae_train, r2_train, mse_eval, mae_eval, r2_eval):
@@ -208,7 +209,7 @@ class CustomTest:
             'Value': [mse_train, mae_train, r2_train, mse_eval, mae_eval, r2_eval]
         }
         df = pd.DataFrame(metrics)
-        df.to_excel('evaluation_metrics.xlsx', index=False)
+        df.to_excel(f'{self.name}.xlsx', index=False)
 
     def run(self):
         """Run the evaluation pipeline."""
